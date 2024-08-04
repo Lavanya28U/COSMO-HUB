@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View</title>
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+  <style>
+    .video-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: -1;
+      }
+      
+      .video-background video {
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    .swiper-slide {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+    
+    .swiper-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .hero {
+        width: 100%;
+        height: 300px;
+        position: relative;
+    }
+    
+    .hero img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .copy {
+        text-align: center;
+        padding: 20px;
+    }
+    
+    h1, h3 {
+        margin: 0;
+    }
+    
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+    
+    .btn:hover {
+        background-color: #0056b3;
+    }
+    
+    .footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+    }
+    
+    .views, .time {
+        display: flex;
+        align-items: center;
+    }
+    
+    .views i, .time i {
+        margin-right: 5px;
+    }
+    
+    .current-time {
+        font-weight: bold;
+    }
+    
+    body {
+      background: #222;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      padding: 0;
+      margin: 0 10px 0 0;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      padding: 0;
+      margin: 5px 0 15px 0;
+      color: darkred;
+    }
+
+    p {
+      padding: 0;
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.5rem;
+      color: graytext;
+    }
+
+    .swiper-container {
+      width: 100%;
+      padding-top: 50px;
+      padding-bottom: 50px;
+    }
+
+    .swiper-slide {
+      width: 400px;
+      height: 500px;
+      padding: 5px;
+    }
+
+    .swiper-content {
+      background-color: #fff;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero {
+      width: 100%;
+      height: 175px;
+      position: relative;
+    }
+
+    .calendar {
+      width: 60px;
+      height: 60px;
+      float: right;
+      background-color: darkred;
+      border-radius: 50%;
+      margin-right: 15px;
+      margin-top: 15px;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .calendar .date {
+      font-size: 1.2rem;
+      line-height: 1.3rem;
+    }
+
+    .calendar .month {
+      font-size: .8rem;
+    }
+
+    .photo-btn {
+      position: absolute;
+      bottom: 0;
+      width: 100px;
+      height: 40px;
+      background-color: darkred;
+      border: none;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #fff;
+      transition: .2s all;
+      cursor: pointer;
+      display: flex;
+      align-content: center;
+      justify-content: center;
+    }
+
+    .photo-btn:hover {
+      width: 100%;
+      height: 100%;
+    }
+
+    .photo-btn .text {
+      text-align: center;
+      line-height: 40px;
+    }
+
+    .gallery {
+      width: 100%;
+      display: none;
+      flex-direction: column;
+    }
+
+    .gallery .row {
+      width: 100%;
+      height: 34%;
+      display: flex;
+    }
+
+    .gallery .row .image {
+      opacity: .6;
+      width: 34%;
+      height: 100%;
+      display: inline-block;
+      transition: .2s all;
+    }
+
+    .gallery .row .image:hover {
+      opacity: 1;
+    }
+
+    .copy {
+      padding: 20px;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 0;
+      margin-bottom: 35px;
+      color: graytext;
+    }
+
+    .footer .time {
+      display: inline-block;
+    }
+
+    .footer .comments {
+      display: inline-block;
+      margin-left: 20px;
+      cursor: pointer;
+      transition: .2s all;
+    }
+
+    .footer .comments:hover {
+      color: darkred;
+    }
+  </style>
+</head>
+<body>
+    <div class="video-background">
+        <video autoplay muted loop id="background-video">
+          <source src="images/space2.mp4" type="video/mp4">
+        </video>
+      </div>
+
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+       
+
+
+
+
+<div class="swiper-slide">
+    <div class="swiper-content">
+        <div class="hero new-york">
+            <img src="images/celestial_bodies.jpg" alt="Celestial Bodies">
+        </div>
+        <div class="copy">
+            <h1>Celestial Bodies</h1>
+            <h3>Explore the wonders of the universe.</h3>
+            <p>This table contains information about celestial bodies such as their name, type, mass, size, composition, and orbital parameters.</p>
+            <a href="view_cb.php" class="btn">View Details</a>
+            <div class="footer">
+                <div class="views">
+                    <i class="fas fa-eye"></i> <span class="view-count">100</span> views
+                </div>
+                <div class="time">
+                    <i class="fas fa-clock"></i> <span class="current-time"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="swiper-slide">
+    <div class="swiper-content">
+        <div class="hero black-hole">
+            <img src="images/blackhole.jpg" alt="Black Holes">
+        </div>
+        <div class="copy">
+            <h1>Black Holes</h1>
+            <h3>Explore the mysteries of black holes.</h3>
+            <p>This table contains information about black holes including their mass, size, spectral class, and description.</p>
+            <a href="view_bh.php" class="btn">View Details</a>
+            <div class="footer">
+                <div class="views">
+                    <i class="fas fa-eye"></i> <span class="view-count">100</span> views
+                </div>
+                <div class="time">
+                    <i class="fas fa-clock"></i> <span class="current-time"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="swiper-slide">
+    <div class="swiper-content">
+        <div class="hero comet">
+            <img src="images/comet.jpg" alt="Comets">
+        </div>
+        <div class="copy">
+            <h1>Comets</h1>
+            <h3>Discover the beauty of comets.</h3>
+            <p>This table contains information about comets, their names, text, and timestamps.</p>
+            <a href="view_comets.php" class="btn">View Details</a>
+            <div class="footer">
+                <div class="views">
+                    <i class="fas fa-eye"></i> <span class="view-count">100</span> views
+                </div>
+                <div class="time">
+                    <i class="fas fa-clock"></i> <span class="current-time"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="swiper-slide">
+    <div class="swiper-content">
+        <div class="hero asteroid">
+            <img src="images/am.jpg" alt="Asteroids and Meteors">
+        </div>
+        <div class="copy">
+            <h1>Asteroids & Meteors</h1>
+            <h3>Learn about asteroids and meteors.</h3>
+            <p>This table contains information about asteroids and meteors including their mass, size, composition, orbital details, and description.</p>
+            <a href="view_am.php" class="btn">View Details</a>
+            <div class="footer">
+                <div class="views">
+                    <i class="fas fa-eye"></i> <span class="view-count">100</span> views
+                </div>
+                <div class="time">
+                    <i class="fas fa-clock"></i> <span class="current-time"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="swiper-slide">
+    <div class="swiper-content">
+        <div class="hero galaxies">
+            <img src="images/galaxy.jpg" alt="Galaxies">
+        </div>
+        <div class="copy">
+            <h1>Galaxies</h1>
+            <h3>Explore the vastness of the universe.</h3>
+            <p>This table contains information about galaxies, including their type, size, and description.</p>
+            <a href="view_galaxies.php" class="btn">View Details</a>
+            <div class="footer">
+                <div class="views">
+                    <i class="fas fa-eye"></i> <span class="view-count">100</span> views
+                </div>
+                <div class="time">
+                    <i class="fas fa-clock"></i> <span class="current-time"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="swiper-slide">
+    <div class="swiper-content">
+        <div class="hero satellite">
+            <img src="images/sat.jpg" alt="Satellite">
+        </div>
+        <div class="copy">
+            <h1>Satellites</h1>
+            <h3>Discover the man-made wonders orbiting Earth.</h3>
+            <p>This table contains information about satellites, including their launch date, purpose, orbital type, and launch vehicle.</p>
+            <a href="view_satellite.php" class="btn">View Details</a>
+            <div class="footer">
+                <div class="views">
+                    <i class="fas fa-eye"></i> <span class="view-count">100</span> views
+                </div>
+                <div class="time">
+                    <i class="fas fa-clock"></i> <span class="current-time"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="swiper-slide">
+    <div class="swiper-content">
+        <div class="hero astronomical-events">
+            <img src="images/ae.jpg" alt="Astronomical Events">
+        </div>
+        <div class="copy">
+            <h1>Astronomical Events</h1>
+            <h3>Explore celestial phenomena throughout history.</h3>
+            <p>This table contains information about various astronomical events, including their type, date, location, and description.</p>
+            <a href="view_ae.php" class="btn">View Details</a>
+            <div class="footer">
+                <div class="views">
+                    <i class="fas fa-eye"></i> <span class="view-count">100</span> views
+                </div>
+                <div class="time">
+                    <i class="fas fa-clock"></i> <span class="current-time"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="swiper-slide">
+    <div class="swiper-content">
+        <div class="hero space-weather">
+            <img src="images/spacew.jpg" alt="Space Weather">
+        </div>
+        <div class="copy">
+            <h1>Space Weather</h1>
+            <h3>Stay informed about space weather phenomena.</h3>
+            <p>This table contains information about space weather events, including their type, date, intensity, and description.</p>
+            <a href="view_sw.php" class="btn">View Details</a>
+            <div class="footer">
+                <div class="views">
+                    <i class="fas fa-eye"></i> <span class="view-count">100</span> views
+                </div>
+                <div class="time">
+                    <i class="fas fa-clock"></i> <span class="current-time"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="swiper-slide">
+    <div class="swiper-content">
+        <div class="hero space-missions">
+            <img src="images/spacem.jpg" alt="Space Missions">
+        </div>
+        <div class="copy">
+            <h1>Space Missions</h1>
+            <h3>Discover missions to explore the cosmos.</h3>
+            <p>This table contains information about space missions, including their name, launch date, end date, objective, destination, spacecraft, type, outcome, and details.</p>
+            <a href="view_sm.php" class="btn">View Details</a>
+            <div class="footer">
+                <div class="views">
+                    <i class="fas fa-eye"></i> <span class="view-count">100</span> views
+                </div>
+                <div class="time">
+                    <i class="fas fa-clock"></i> <span class="current-time"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="swiper-slide">
+    <div class="swiper-content">
+        <div class="hero space-organisation">
+            <img src="images/so.jpeg" alt="Space Organisation">
+        </div>
+        <div class="copy">
+            <h1>Space Organisation</h1>
+            <h3>Learn about organizations exploring outer space.</h3>
+            <p>This table contains information about space organizations, including their name, country, established date, partnership, projects, and website URL.</p>
+            <a href="view_so.php" class="btn">View Details</a>
+            <div class="footer">
+                <div class="views">
+                    <i class="fas fa-eye"></i> <span class="view-count">100</span> views
+                </div>
+                <div class="time">
+                    <i class="fas fa-clock"></i> <span class="current-time"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="swiper-slide">
+    <div class="swiper-content">
+        <div class="hero space-education">
+            <img src="images/se.jpg" alt="Space Education">
+        </div>
+        <div class="copy">
+            <h1>Space Education</h1>
+            <h3>Discover educational resources about space.</h3>
+            <p>This table contains information about space education content, including its type, title, published date, level, description, and URL.</p>
+            <a href="view_se.php" class="btn">View Details</a>
+            <div class="footer">
+                <div class="views">
+                    <i class="fas fa-eye"></i> <span class="view-count">100</span> views
+                </div>
+                <div class="time">
+                    <i class="fas fa-clock"></i> <span class="current-time"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    </div>
+    
+    <div class="swiper-pagination"></div>
+</div>
+
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script>
+    var swiper = new Swiper('.swiper-container', {
+      effect: 'coverflow',
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: 'auto',
+      coverflowEffect: {
+        rotate: 50,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+        slideShadows : true,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+      },
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var currentTimeElement = document.querySelector('.current-time');
+        if (currentTimeElement) {
+            currentTimeElement.textContent = new Date().toLocaleString();
+        }
+    });
+  </script>
+</body>
+</html>

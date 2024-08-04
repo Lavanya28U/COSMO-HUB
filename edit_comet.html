@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edit Comet</title>
+</head>
+<body>
+<h1>Edit Comet</h1>
+<form id="editComet" method="post" action="save_comet.php">
+    <label for="name">Comet Name:</label>
+    <input type="text" id="name" name="name">
+    <button type="button" onclick="searchComet()">Search</button>
+    <br><br>
+    <div id="CometFields" style="display: none;">
+        <label for="comet_text">Comet Text:</label>
+        <textarea id="comet_text" name="comet_text"></textarea><br>
+        <label for="time_stamp">Time Stamp:</label>
+        <input type="datetime-local" id="time_stamp" name="time_stamp"><br>
+        <button type="submit">Save Changes</button>
+        <button type="button" onclick="clearFields()">Clear</button>
+    </div>
+    <div id="errorMessage" style="color: red; display: none;">Comet not found.</div>
+</form>
+
+<script>
+    function searchComet() {
+        var cname = document.getElementById("name").value;
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "get_comet.php?name=" + cname, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    populateFields(response.comet);
+                    document.getElementById("CometFields").style.display = "block";
+                    document.getElementById("errorMessage").style.display = "none";
+                } else {
+                    document.getElementById("errorMessage").style.display = "block";
+                    document.getElementById("CometFields").style.display = "none";
+                }
+            }
+        };
+        xhr.send();
+    }
+
+    function populateFields(comet) {
+        document.getElementById("name").value = comet.name;
+        document.getElementById("name").readOnly = true; 
+        document.getElementById("comet_text").value = comet.comet_text;
+        document.getElementById("time_stamp").value = comet.time_stamp;
+    }
+
+    function clearFields() {
+        document.getElementById("editComet").reset();
+        document.getElementById("CometFields").style.display = "none";
+        document.getElementById("errorMessage").style.display = "none";
+    }
+</script>
+</body>
+</html>

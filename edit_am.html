@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edit Asteroids & Meteors</title>
+</head>
+<body>
+<h1>Edit Asteroids & Meteors</h1>
+<form id="editAsteroidMeteor" method="post" action="save_am.php">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name">
+    <button type="button" onclick="searchAsteroidMeteor()">Search</button>
+    <br><br>
+    <div id="AsteroidMeteorFields" style="display: none;">
+        <label for="mass">Mass:</label>
+        <input type="number" id="mass" name="mass"><br>
+        <label for="size">Size:</label>
+        <input type="number" id="size" name="size"><br>
+        <label for="composition">Composition:</label>
+        <textarea id="composition" name="composition"></textarea><br>
+        <label for="orbital_details">Orbital Details:</label>
+        <textarea id="orbital_details" name="orbital_details"></textarea><br>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description"></textarea><br>
+        <button type="submit">Save Changes</button>
+        <button type="button" onclick="clearFields()">Clear</button>
+    </div>
+    <div id="errorMessage" style="color: red; display: none;">Asteroid or Meteor not found.</div>
+</form>
+
+<script>
+    function searchAsteroidMeteor() {
+        var name = document.getElementById("name").value;
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "get_am.php?name=" + name, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    populateFields(response.asteroidMeteor);
+                    document.getElementById("AsteroidMeteorFields").style.display = "block";
+                    document.getElementById("errorMessage").style.display = "none";
+                } else {
+                    document.getElementById("errorMessage").style.display = "block";
+                    document.getElementById("AsteroidMeteorFields").style.display = "none";
+                }
+            }
+        };
+        xhr.send();
+    }
+
+    function populateFields(asteroidMeteor) {
+        document.getElementById("name").value = asteroidMeteor.name;
+        document.getElementById("name").readOnly = true; 
+        document.getElementById("mass").value = asteroidMeteor.mass;
+        document.getElementById("size").value = asteroidMeteor.size;
+        document.getElementById("composition").value = asteroidMeteor.composition;
+        document.getElementById("orbital_details").value = asteroidMeteor.orbital_details;
+        document.getElementById("description").value = asteroidMeteor.description;
+    }
+
+    function clearFields() {
+        document.getElementById("editAsteroidMeteor").reset();
+        document.getElementById("AsteroidMeteorFields").style.display = "none";
+        document.getElementById("errorMessage").style.display = "none";
+    }
+</script>
+</body>
+</html>

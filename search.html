@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Database Search</title>
+    <link rel="stylesheet" href="search.css">
+</head>
+<body>
+    <div class="container">
+        <img src="images/LOGO.png" alt="Space Logo" class="logo"> 
+        <h1>Space Database Search</h1>
+        
+        <section>
+            <h2>Celestial Bodies</h2>
+            <form method="post" action="search.php" onsubmit="searchTable(this); return false;">
+                <input type="text" name="query" placeholder="Search Celestial Bodies">
+                <input type="hidden" name="table" value="celestial_bodies">
+                <input type="hidden" name="result_id" value="celestial_bodies_results">
+                <input type="submit" value="Search">
+            </form>
+            <div class="results" id="celestial_bodies_results">
+            </div>
+        </section>
+        
+        <section>
+            <h2>Black Holes</h2>
+            <form method="post" action="search.php" onsubmit="searchTable(this); return false;">
+                <input type="text" name="query" placeholder="Search Black Holes">
+                <input type="hidden" name="table" value="black_holes">
+                <input type="hidden" name="result_id" value="black_holes_results">
+                <input type="submit" value="Search">
+            </form>
+            <div class="results" id="black_holes_results">
+            </div>
+        </section>
+
+        <section>
+            <h2>Comets</h2>
+            <form method="post" action="search.php" onsubmit="searchTable(this); return false;">
+                <input type="text" name="query" placeholder="Search Comets">
+                <input type="hidden" name="table" value="comet">
+                <input type="hidden" name="result_id" value="comet_results">
+                <input type="submit" value="Search">
+            </form>
+            <div class="results" id="comet_results">
+            </div>
+        </section>
+
+        <section>
+            <h2>Asteroids and Meteors</h2>
+            <form method="post" action="search.php" onsubmit="searchTable(this); return false;">
+                <input type="text" name="query" placeholder="Search Asteroids and Meteors">
+                <input type="hidden" name="table" value="asteroids_meteors">
+                <input type="hidden" name="result_id" value="asteroids_meteors_results">
+                <input type="submit" value="Search">
+            </form>
+            <div class="results" id="asteroids_meteors_results">
+            </div>
+        </section>
+
+        <section>
+            <h2>Galaxies</h2>
+            <form method="post" action="search.php" onsubmit="searchTable(this); return false;">
+                <input type="text" name="query" placeholder="Search Galaxies">
+                <input type="hidden" name="table" value="galaxies">
+                <input type="hidden" name="result_id" value="galaxies_results">
+                <input type="submit" value="Search">
+            </form>
+            <div class="results" id="galaxies_results">
+            </div>
+        </section>
+
+        <section>
+            <h2>Satellites</h2>
+            <form method="post" action="search.php" onsubmit="searchTable(this); return false;">
+                <input type="text" name="query" placeholder="Search Satellites">
+                <input type="hidden" name="table" value="satellite">
+                <input type="hidden" name="result_id" value="satellite_results">
+                <input type="submit" value="Search">
+            </form>
+            <div class="results" id="satellite_results">
+                
+            </div>
+        </section>
+
+        <section>
+            <h2>Astronomical Events</h2>
+            <form method="post" action="search.php" onsubmit="searchTable(this); return false;">
+                <input type="text" name="query" placeholder="Search Astronomical Events">
+                <input type="hidden" name="table" value="astronomical_events">
+                <input type="hidden" name="result_id" value="astronomical_events_results">
+                <input type="submit" value="Search">
+            </form>
+            <div class="results" id="astronomical_events_results">
+            </div>
+        </section>
+
+        <section>
+            <h2>Space Weather</h2>
+            <form method="post" action="search.php" onsubmit="searchTable(this); return false;">
+                <input type="text" name="query" placeholder="Search Space Weather">
+                <input type="hidden" name="table" value="space_weather">
+                <input type="hidden" name="result_id" value="space_weather_results">
+                <input type="submit" value="Search">
+            </form>
+            <div class="results" id="space_weather_results">
+            </div>
+        </section>
+
+        <section>
+            <h2>Space Missions</h2>
+            <form method="post" action="search.php" onsubmit="searchTable(this); return false;">
+                <input type="text" name="query" placeholder="Search Space Missions">
+                <input type="hidden" name="table" value="space_missions">
+                <input type="hidden" name="result_id" value="space_missions_results">
+                <input type="submit" value="Search">
+            </form>
+            <div class="results" id="space_missions_results">
+            </div>
+        </section>
+
+        <section>
+            <h2>Space Organisation</h2>
+            <form method="post" action="search.php" onsubmit="searchTable(this); return false;">
+                <input type="text" name="query" placeholder="Search Space Organisation">
+                <input type="hidden" name="table" value="space_organisation">
+                <input type="hidden" name="result_id" value="space_organisation_results">
+                <input type="submit" value="Search">
+            </form>
+            <div class="results" id="space_organisation_results">
+            </div>
+        </section>
+
+        <section>
+            <h2>Space Education</h2>
+            <form method="post" action="search.php" onsubmit="searchTable(this); return false;">
+                <input type="text" name="query" placeholder="Search Space Education">
+                <input type="hidden" name="table" value="space_education">
+                <input type="hidden" name="result_id" value="space_education_results">
+                <input type="submit" value="Search">
+            </form>
+            <div class="results" id="space_education_results">
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function searchTable(form) {
+            var table = form.querySelector('input[name="table"]').value;
+            var query = form.querySelector('input[name="query"]').value;
+            var resultId = form.querySelector('input[name="result_id"]').value;
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById(resultId).innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("POST", "search.php", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("table=" + table + "&query=" + query);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+
+
+.video-background {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.video-background video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+    color: white; /* Example text color */
+}
+.form-container {
+    background-color: rgba(255, 255, 255, 0.5); /* RGBA with 50% opacity */
+    padding: 20px;
+    border-radius: 10px;
+}

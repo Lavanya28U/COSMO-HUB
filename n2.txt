@@ -1,0 +1,161 @@
+CREATE DATABASE space_dbms;
+
+CREATE TABLE celestial_bodies (
+    id INT AUTO_INCREMENT NOT NULL PRIMARY KEY ,
+    name VARCHAR(300) NOT NULL UNIQUE,
+    type VARCHAR(300),
+    mass FLOAT,
+    size FLOAT,
+    composition VARCHAR(1000),
+    orbital_parameters VARCHAR(1000)
+   
+);
+
+CREATE TABLE black_holes 
+(     id INT,  
+   name VARCHAR(300) NOT NULL unique,    
+   mass FLOAT,     
+   size FLOAT,    
+   spectral_class VARCHAR(300),   
+   description VARCHAR(1000),    
+   PRIMARY KEY(id,name),
+   FOREIGN KEY (id) REFERENCES celestial_bodies(id) ON DELETE CASCADE );
+
+CREATE TABLE comet (
+    comet_id INT ,
+    name VARCHAR(300) NOT NULL UNIQUE,
+    comet_text VARCHAR(1000),
+    time_stamp TIMESTAMP,
+     PRIMARY KEY(comet_id,name),
+    FOREIGN KEY (comet_id) REFERENCES celestial_bodies(id) ON DELETE CASCADE
+);
+
+CREATE TABLE asteroids_meteors (
+    id INT ,
+    name VARCHAR(300) ,
+    mass FLOAT,
+    size FLOAT,
+    composition VARCHAR(1000),
+    orbital_details VARCHAR(1000),
+    description VARCHAR(1000),
+    PRIMARY KEY(id,name),
+    FOREIGN KEY (id) REFERENCES celestial_bodies(id) ON DELETE CASCADE
+);
+
+CREATE TABLE galaxies (
+    id INT,
+    name VARCHAR(300) NOT NULL UNIQUE,
+    type VARCHAR(300),
+    size FLOAT,
+    description VARCHAR(1000),
+    PRIMARY KEY(id,name),
+    FOREIGN KEY (id) REFERENCES celestial_bodies(id) ON DELETE CASCADE
+);
+
+CREATE TABLE satellite (
+    s_id INT  AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    name VARCHAR(300) NOT NULL UNIQUE,
+    launch_date DATE,
+    purpose VARCHAR(3000),
+    orbital_type VARCHAR(3000),
+    orbital_period VARCHAR(3000),
+    launch_vehicle VARCHAR(3000),
+    mass VARCHAR(3000),
+    time_stamp TIMESTAMP,
+    celestial_body_id INT,
+    FOREIGN KEY (celestial_body_id) REFERENCES celestial_bodies(id) ON DELETE CASCADE
+);
+
+CREATE TABLE astronomical_events (
+    event_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    type VARCHAR(100),
+    date DATE,
+    location VARCHAR(100),
+    time_stamp TIMESTAMP,
+    description VARCHAR(255),
+    celestial_body_id INT,
+    FOREIGN KEY (celestial_body_id) REFERENCES celestial_bodies(id) ON DELETE CASCADE
+);
+
+CREATE TABLE space_weather (
+    w_id INT  AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    type VARCHAR(50),
+    date DATE,
+    intensity VARCHAR(20),
+    time_stamp TIMESTAMP,
+    description VARCHAR(255),
+    celestial_body_id INT,
+    FOREIGN KEY (celestial_body_id) REFERENCES celestial_bodies(id) ON DELETE CASCADE
+);
+
+CREATE TABLE space_missions (
+    mission_id INT  AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    name VARCHAR(300) NOT NULL unique,
+    launch_date DATE,
+    end_date DATE,
+    time_stamp TIMESTAMP,
+    objective VARCHAR(255),
+    destination VARCHAR(100),
+    space_craft VARCHAR(100),
+    type VARCHAR(200),
+    outcome VARCHAR(100),
+    details VARCHAR(255),
+    satellite_id INT,
+    celestial_body_id INT,
+    FOREIGN KEY (satellite_id) REFERENCES satellite(s_id) ON DELETE CASCADE,
+    FOREIGN KEY (celestial_body_id) REFERENCES celestial_bodies(id) ON DELETE CASCADE 
+);
+
+CREATE TABLE space_organisation (
+    org_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    name VARCHAR(150) NOT NULL unique,
+    country VARCHAR(100),
+    established_date DATE,
+    partnership VARCHAR(150),
+    projects INT NOT NULL,
+    satellite_id INT,
+    url VARCHAR(255) NOT NULL,
+    FOREIGN KEY (satellite_id) REFERENCES satellite(s_id) ON DELETE CASCADE
+);
+
+CREATE TABLE space_education (
+    content_id INT  AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    type VARCHAR(30),
+    title VARCHAR(255),
+    published_date DATE,
+    level VARCHAR(30),
+    description VARCHAR(255),
+    url VARCHAR(255),
+    celestial_body_id INT,
+    FOREIGN KEY (celestial_body_id) REFERENCES celestial_bodies(id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE users (
+    user_id INTEGER  AUTO_INCREMENT PRIMARY KEY,
+    username TEXT NOT NULL,
+    password TEXT NOT NULL,
+    user_type TEXT NOT NULL,
+    auth_code INTEGER,
+    FOREIGN KEY (auth_code) REFERENCES space_organisation(org_id)
+);
+
+ DELIMITER //
+
+CREATE PROCEDURE InsertSatellite (
+    IN satellite_name VARCHAR(300),
+    IN launch_date_input DATE,
+    IN purpose_input VARCHAR(3000),
+    IN orbital_type_input VARCHAR(3000),
+    IN orbital_period_input VARCHAR(3000),
+    IN launch_vehicle_input VARCHAR(3000),
+    IN mass_input VARCHAR(3000),
+    IN celestial_body_id_input INT
+)
+BEGIN
+    INSERT INTO satellite (name, launch_date, purpose, orbital_type, orbital_period, launch_vehicle, mass, celestial_body_id, time_stamp)
+    VALUES (satellite_name, launch_date_input, purpose_input, orbital_type_input, orbital_period_input, launch_vehicle_input, mass_input, celestial_body_id_input, CURRENT_TIMESTAMP);
+END //
+
+DELIMITER ;
+

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edit Galaxy</title>
+</head>
+<body>
+<h1>Edit Galaxy</h1>
+<form id="editGalaxy" method="post" action="save_g.php">
+    <label for="name">Galaxy Name:</label>
+    <input type="text" id="name" name="name">
+    <button type="button" onclick="searchGalaxy()">Search</button>
+    <br><br>
+    <div id="GalaxyFields" style="display: none;">
+        <label for="type">Type:</label>
+        <input type="text" id="type" name="type"><br>
+        <label for="size">Size:</label>
+        <input type="number" id="size" name="size"><br>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description"></textarea><br>
+        <button type="submit">Save Changes</button>
+        <button type="button" onclick="clearFields()">Clear</button>
+    </div>
+    <div id="errorMessage" style="color: red; display: none;">Galaxy not found.</div>
+</form>
+
+<script>
+    function searchGalaxy() {
+        var gname = document.getElementById("name").value;
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "get_g.php?name=" + gname, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    populateFields(response.galaxy);
+                    document.getElementById("GalaxyFields").style.display = "block";
+                    document.getElementById("errorMessage").style.display = "none";
+                } else {
+                    document.getElementById("errorMessage").style.display = "block";
+                    document.getElementById("GalaxyFields").style.display = "none";
+                }
+            }
+        };
+        xhr.send();
+    }
+
+    function populateFields(galaxy) {
+        document.getElementById("name").value = galaxy.name;
+        document.getElementById("name").readOnly = true; // Make the name field read-only
+        document.getElementById("type").value = galaxy.type;
+        document.getElementById("size").value = galaxy.size;
+        document.getElementById("description").value = galaxy.description;
+    }
+
+    function clearFields() {
+        document.getElementById("editGalaxy").reset();
+        document.getElementById("GalaxyFields").style.display = "none";
+        document.getElementById("errorMessage").style.display = "none";
+    }
+</script>
+</body>
+</html>

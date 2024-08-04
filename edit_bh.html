@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edit Black Holes</title>
+</head>
+<body>
+<h1>Edit Black Hole</h1>
+<form id="editBlackHoles" method="post" action="save_bh.php">
+    <label for="name">Black Hole Name:</label>
+    <input type="text" id="name" name="name">
+    <button type="button" onclick="searchBH()">Search</button>
+    <br><br>
+    <div id="BHfields" style="display: none;">
+        <label for="mass">Mass:</label>
+        <input type="number" id="mass" name="mass"><br>
+        <label for="size">Size:</label>
+        <input type="number" id="size" name="size"><br>
+        <label for="spectral_class">Spectral Class:</label>
+        <input type="text" id="spectral_class" name="spectral_class"><br>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description"></textarea><br>
+        <button type="submit">Save Changes</button>
+        <button type="button" onclick="clearFields()">Clear</button>
+    </div>
+    <div id="errorMessage" style="color: red; display: none;">Black Hole not found.</div>
+</form>
+
+<script>
+    function searchBH() {
+        var bname = document.getElementById("name").value;
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "get_bh.php?name=" + bname, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    populateFields(response.black_hole);
+                    document.getElementById("BHfields").style.display = "block";
+                    document.getElementById("errorMessage").style.display = "none";
+                } else {
+                    document.getElementById("errorMessage").style.display = "block";
+                    document.getElementById("BHfields").style.display = "none";
+                }
+            }
+        };
+        xhr.send();
+    }
+
+    function populateFields(blackHole) {
+
+        document.getElementById("mass").value = blackHole.mass;
+        document.getElementById("size").value = blackHole.size;
+        document.getElementById("spectral_class").value = blackHole.spectral_class;
+        document.getElementById("description").value = blackHole.description;
+    }
+
+    function clearFields() {
+        document.getElementById("editBlackHoles").reset();
+        document.getElementById("BHfields").style.display = "none";
+        document.getElementById("errorMessage").style.display = "none";
+    }
+</script>
+</body>
+</html>

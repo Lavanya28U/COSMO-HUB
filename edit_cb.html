@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edit Celestial Bodies</title>
+</head>
+<body>
+<h1>Edit Celestial Body</h1>
+<form id="editCelestialBodies" method="post" action="save_cb.php">
+    <label for="name">Celestial Body :</label>
+    <input type="text" id="name" name="name">
+    <button type="button" onclick="searchCB()">Search</button>
+    <br><br>
+    <div id="CBfields" style="display: none;">
+        <label for="type">Type:</label>
+        <input type="text" id="type" name="type"><br>
+        <label for="mass">Mass:</label>
+        <input type="number" id="mass" name="mass"><br>
+        <label for="size">Size:</label>
+        <input type="number" id="size" name="size"><br>
+        <label for="composition">Composition:</label>
+        <input type="text" id="composition" name="composition"><br>
+        <label for="orbital_parameters">Orbital Parameters:</label>
+        <input type="text" id="orbital_parameters" name="orbital_parameters"><br>
+        <button type="submit">Save Changes</button>
+        <button type="button" onclick="clearFields()">Clear</button>
+    </div>
+    <div id="errorMessage" style="color: red; display: none;">Celestial Body not found.</div>
+</form>
+
+<script>
+    function searchCB() {
+        var cname = document.getElementById("name").value;
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "get_cb.php?name=" + cname, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    populateFields(response.celestial_body);
+                    document.getElementById("CBfields").style.display = "block";
+                    document.getElementById("errorMessage").style.display = "none";
+                } else {
+                    document.getElementById("errorMessage").style.display = "block";
+                    document.getElementById("CBfields").style.display = "none";
+                }
+            }
+        };
+        xhr.send();
+    }
+
+    function populateFields(celestialBody) {
+        document.getElementById("type").value = celestialBody.type;
+        document.getElementById("mass").value = celestialBody.mass;
+        document.getElementById("size").value = celestialBody.size;
+        document.getElementById("composition").value = celestialBody.composition;
+        document.getElementById("orbital_parameters").value = celestialBody.orbital_parameters;
+    }
+
+    function clearFields() {
+        document.getElementById("editCelestialBodies").reset();
+        document.getElementById("CBfields").style.display = "none";
+        document.getElementById("errorMessage").style.display = "none";
+    }
+</script>
+</body>
+</html>

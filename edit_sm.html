@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edit Space Mission</title>
+</head>
+<body>
+<h1>Edit Space Mission</h1>
+<form id="editSpaceMission" method="post" action="save_sm.php">
+    <label for="mission_id">Mission ID:</label>
+    <input type="number" id="mission_id" name="mission_id">
+    <button type="button" onclick="searchSpaceMission()">Search</button>
+    <br><br>
+    <div id="SpaceMissionFields" style="display: none;">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name"><br>
+        <label for="launch_date">Launch Date:</label>
+        <input type="date" id="launch_date" name="launch_date"><br>
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" name="end_date"><br>
+        <label for="objective">Objective:</label>
+        <input type="text" id="objective" name="objective"><br>
+        <label for="destination">Destination:</label>
+        <input type="text" id="destination" name="destination"><br>
+        <label for="space_craft">Spacecraft:</label>
+        <input type="text" id="space_craft" name="space_craft"><br>
+        <label for="type">Type:</label>
+        <input type="text" id="type" name="type"><br>
+        <label for="outcome">Outcome:</label>
+        <input type="text" id="outcome" name="outcome"><br>
+        <label for="details">Details:</label>
+        <textarea id="details" name="details"></textarea><br>
+        <label for="satellite_id">Satellite ID:</label>
+        <input type="number" id="satellite_id" name="satellite_id"><br>
+        <label for="celestial_body_id">Celestial Body ID:</label>
+        <input type="number" id="celestial_body_id" name="celestial_body_id"><br>
+        <button type="submit">Save Changes</button>
+        <button type="button" onclick="clearFields()">Clear</button>
+    </div>
+    <div id="errorMessage" style="color: red; display: none;">Space mission not found.</div>
+</form>
+
+<script>
+    function searchSpaceMission() {
+        var missionId = document.getElementById("mission_id").value;
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "get_sm.php?mission_id=" + missionId, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    populateFields(response.spaceMission);
+                    document.getElementById("SpaceMissionFields").style.display = "block";
+                    document.getElementById("errorMessage").style.display = "none";
+                } else {
+                    document.getElementById("errorMessage").style.display = "block";
+                    document.getElementById("SpaceMissionFields").style.display = "none";
+                }
+            }
+        };
+        xhr.send();
+    }
+
+    function populateFields(spaceMission) {
+        document.getElementById("name").value = spaceMission.name;
+        document.getElementById("launch_date").value = spaceMission.launch_date;
+        document.getElementById("end_date").value = spaceMission.end_date;
+        document.getElementById("objective").value = spaceMission.objective;
+        document.getElementById("destination").value = spaceMission.destination;
+        document.getElementById("space_craft").value = spaceMission.space_craft;
+        document.getElementById("type").value = spaceMission.type;
+        document.getElementById("outcome").value = spaceMission.outcome;
+        document.getElementById("details").value = spaceMission.details;
+        document.getElementById("satellite_id").value = spaceMission.satellite_id;
+        document.getElementById("celestial_body_id").value = spaceMission.celestial_body_id;
+    }
+
+    function clearFields() {
+        document.getElementById("editSpaceMission").reset();
+        document.getElementById("SpaceMissionFields").style.display = "none";
+        document.getElementById("errorMessage").style.display = "none";
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('images/search.gif'); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: black;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: rgba(255, 255, 255, 0.9); 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+}
+
+h1, h2 {
+    color: #333;
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+input[type="text"], input[type="submit"] {
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+}
+
+.results {
+    margin-top: 10px;
+    background-color: rgba(255, 255, 255, 0.9); 
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); 
+}
+
+.results p {
+    margin: 5px 0;
+}

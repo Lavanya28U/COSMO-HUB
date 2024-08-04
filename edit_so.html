@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edit Space Organization</title>
+</head>
+<body>
+<h1>Edit Space Organization</h1>
+<form id="editSpaceOrganization" method="post" action="save_so.php">
+    <label for="org_id">Organization ID:</label>
+    <input type="number" id="org_id" name="org_id">
+    <button type="button" onclick="searchSpaceOrganization()">Search</button>
+    <br><br>
+    <div id="SpaceOrganizationFields" style="display: none;">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name"><br>
+        <label for="country">Country:</label>
+        <input type="text" id="country" name="country"><br>
+        <label for="established_date">Established Date:</label>
+        <input type="date" id="established_date" name="established_date"><br>
+        <label for="partnership">Partnership:</label>
+        <input type="text" id="partnership" name="partnership"><br>
+        <label for="projects">Projects:</label>
+        <input type="number" id="projects" name="projects"><br>
+        <label for="url">URL:</label>
+        <input type="text" id="url" name="url"><br>
+        <label for="satellite_id">Satellite:</label>
+        <select id="satellite_id" name="satellite_id">
+            
+        </select><br>
+        <button type="submit">Save Changes</button>
+        <button type="button" onclick="clearFields()">Clear</button>
+    </div>
+    <div id="errorMessage" style="color: red; display: none;">Space organization not found.</div>
+</form>
+
+<script>
+    function searchSpaceOrganization() {
+        var orgId = document.getElementById("org_id").value;
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "get_so.php?org_id=" + orgId, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    populateFields(response.spaceOrganization);
+                    document.getElementById("SpaceOrganizationFields").style.display = "block";
+                    document.getElementById("errorMessage").style.display = "none";
+                } else {
+                    document.getElementById("errorMessage").style.display = "block";
+                    document.getElementById("SpaceOrganizationFields").style.display = "none";
+                }
+            }
+        };
+        xhr.send();
+    }
+
+    function populateFields(spaceOrganization) {
+        document.getElementById("name").value = spaceOrganization.name;
+        document.getElementById("country").value = spaceOrganization.country;
+        document.getElementById("established_date").value = spaceOrganization.established_date;
+        document.getElementById("partnership").value = spaceOrganization.partnership;
+        document.getElementById("projects").value = spaceOrganization.projects;
+        document.getElementById("url").value = spaceOrganization.url;
+        
+    
+        populateSatelliteDropdown(spaceOrganization.satellite_id);
+    }
+
+    function populateSatelliteDropdown(selectedSatelliteId) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "get_sat1.php", true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var satellites = JSON.parse(xhr.responseText);
+                var select = document.getElementById("satellite_id");
+                select.innerHTML = ""; 
+                
+                satellites.forEach(function(satellite) {
+                    var option = document.createElement("option");
+                    option.value = satellite.s_id;
+                    option.text = satellite.name;
+                    if (satellite.s_id == selectedSatelliteId) {
+                        option.selected = true; 
+                    }
+                    select.appendChild(option);
+                });
+            }
+        };
+        xhr.send();
+    }
+
+    function clearFields() {
+        document.getElementById("editSpaceOrganization").reset();
+        document.getElementById("SpaceOrganizationFields").style.display = "none";
+        document.getElementById("errorMessage").style.display = "none";
+    }
+</script>
+</body>
+</html>

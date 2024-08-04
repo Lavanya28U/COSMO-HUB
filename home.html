@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COSMO HUB</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        
+        video {
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        header,
+        section {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Your existing CSS styles */
+        /* CSS for logo, website name, and navigation */
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 10px 0;
+        }
+
+        .logo img {
+            width:200px; /* Adjust as needed */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        .website-name {
+            margin-top: 10px;
+            font-size: 32px;
+            color: #05386b;
+        }
+
+        nav {
+            margin-top: 10px;
+            /* Your navigation styles here */
+        }
+
+        body {
+            background: #edf5e1;
+            font-family: 'Roboto', sans-serif;
+            text-transform: uppercase;
+            text-shadow: .5px .5px 0 #CCCCCC;
+            margin: 0;
+            padding: 0;
+            /* overflow-x: hidden; Hide horizontal scrollbar */
+        }
+
+        .background {
+            position: fixed;
+            z-index: -1;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            transition: .75s;
+        }
+
+        .nav {
+            padding: 0px;
+            width: 640px;
+            margin: 100px auto auto auto;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        li a {
+            padding: 20px;
+            float: left;
+            width: 100px;
+            text-align: center;
+            font-size: 15px;
+            color: #edf5e1;
+            text-decoration: none;
+        }
+
+        li a:hover .circle {
+            position: relative;
+            z-index: 1;
+            top: -60px;
+            width: 80px;
+            height: 80px;
+            border-radius: 100%;
+            animation: illuminate 2s ease-out infinite;
+            background: #fdc6be;
+        }
+
+        li i {
+            height: 50px;
+        }
+
+        li a:hover i {
+            transform: translateY(-10px);
+        }
+
+        li a .title {
+            font-size: 0px;
+        }
+
+        li a:hover .title {
+            transform: translateY(10px);
+            font-size: 15px;
+            transition: .5s;
+        }
+
+        li a.title:hover {
+            transform: translateY(-10px);
+        }
+
+        .nav li:first-child a {
+            background: #05386b !important;
+        }
+
+        .nav li:nth-child(2) a {
+            background: #379683 !important;
+        }
+
+        .nav li:nth-child(3) a {
+            background: #5cdb95 !important;
+        }
+
+        .nav li:nth-child(4) a {
+            background: #8ee4af !important;
+        }
+
+        .nav li:first-child:hover~.background {
+            background: #05386b;
+        }
+
+        .nav li:nth-child(2):hover~.background {
+            background: #379683;
+        }
+
+        .nav li:nth-child(3):hover~.background {
+            background: #5cdb95;
+        }
+
+        .nav li:nth-child(4):hover~.background {
+            background: #8ee4af;
+        }
+
+        @keyframes illuminate {
+            0% {
+                transform: scale(.7, .7);
+                opacity: 0.7;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+
+            100% {
+                transform: scale(1.15);
+                opacity: 0;
+            }
+        }
+
+        /* Updated section background styles */
+        .about-us,
+        .keyfeatures,
+        .info{
+            background-color: #05386b; /* Adjust background color as needed */
+            color: #ffffff; /* Set text color */
+            font-family:cursive;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 600px; 
+            margin: 20px auto; 
+            padding: 20px; 
+        }
+
+        /* Your existing CSS styles */
+        /* Styles for section headings and paragraph text */
+        .about-us h2,
+        .keyfeatures h2,
+        .info h2 {
+            color: #ffffff; /* Set heading text color */
+        }
+
+        .section h2 {
+            font-size: 24px;
+            color: #05386b;
+            margin-bottom: 10px;
+        }
+        
+        .section p {
+            font-size: 16px;
+            color: #ffffff; /* Set paragraph text color */
+            line-height: 1.6;
+        }
+
+        /* CSS for Sign Up / Log In buttons */
+        .buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .signup, .login {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #05386b;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .signup:hover, .login:hover {
+            background-color: #379683;
+        }
+
+        .signup:focus, .login:focus {
+            outline: none;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Hide horizontal scrollbar */
+        }
+        
+        .gallery {
+            display: flex;
+            overflow-x: hidden;
+        }
+        
+        .image-container {
+            flex: 0 0 auto;
+            margin-right: 10px; /* Adjust spacing between images */
+        }
+        
+        .image-container img {
+            width: 200px; /* Adjust image width as needed */
+            height: auto;
+        }
+
+        .footer {
+            background-color: #05386b;
+            color: #edf5e1;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 20px;
+        }
+
+        .footer a {
+            color: #edf5e1;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="video-container">
+        <video autoplay loop muted>
+            <source src="images/v3.mp4" type="video/mp4"> 
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <header>
+        <div class="logo">
+            <img src="images/LOGO.png" alt="Your Logo">
+        </div>
+        
+    <section>    
+    <ul class="nav">
+        <li>
+            <a href="home.HTML" target="_blank">
+                <i class="fas fa-home fa-3x home">
+                    <div class="circle"></div>
+                </i>
+                <div class="title">Home</div>
+            </a>
+        </li>
+
+        <li>
+            <a href="dummy_view.html" target="_blank">
+                <i class="fa-sharp fa-solid fa-eye fa-3x">
+                    <div class="circle"></div>
+                </i>
+                <div class="title">VIEW</div>
+            </a>
+        </li>
+
+        <li>
+            <a href="home.HTML" target="_blank">
+                <i class="fa-solid fa-face-smile fa-3x"></i>
+                <div class="circle"></div>
+                <div class="title">ABOUT US</div>
+            </a>
+        </li>
+
+        <li>
+            <a href="d_signup.html" target="_blank">
+                <i class="fa-solid fa-user-plus fa-3x">
+                    <div class="circle"></div>
+                </i>
+                <div class="title">SIGN UP\LOGIN</div>
+            </a>
+        </li>
+        <div class="background"></div>
+    </ul>
+    
+</section>
+
+</header>
+
+<section>
+
+</section>
+
+<section class="about-us">
+    <h2>About Us</h2>
+    <p>Welcome to Celestial Quest, your gateway to the wonders of the universe! We are passionate about exploring the cosmos and bringing the marvels of space closer to you...</p>
+    
+</section>
+
+<section class="keyfeatures">
+    <h2>Key Features</h2>
+    <ul>
+        <li><strong>Celestial Catalog:</strong> Explore our extensive catalog of stars, planets, moons, asteroids, and galaxies.</li>
+        <li><strong>Mission Repository:</strong> Learn about past and present space missions, their objectives, and outcomes.</li>
+        <li><strong>Astronomical Events Log:</strong> Stay updated on significant celestial events, from eclipses to supernovae.</li>
+        <li><strong>Telescope Integration:</strong> Connect with ground-based and space telescopes for real-time observations.</li>
+        <li><strong>Data Analysis Tools:</strong> Dive into advanced tools for in-depth analysis and visualization of space data.</li>
+    </ul>
+</section>
+
+
+<section class="info" >
+    <h2>Get Started</h2>
+    <p>Ready to embark on your celestial journey? </p>
+
+    <p>Create an account or log in to unlock exclusive features, set up personalized observations, and engage with a community of like-minded space enthusiasts.</p>
+   
+    <div class="buttons">
+        <a href="d_signup.html"><button class="signup">Sign Up</button></a>
+        <a href="d_signup.html"><button class="login">Login</button></a>
+    </div>
+    
+</section>
+
+<div class="gallery" id="gallery">
+    
+</div>
+<footer class="footer">
+    <p>&copy; 2024 Cosmo Hub. All rights reserved.</p>
+</footer>
+<script>
+  
+const images = [
+    'images/1.jpg',
+    'images/2.jpeg',
+    'images/3.jpeg',
+    'images/4.jpg',
+    'images/5.jpg',
+    'images/6.jpeg',
+    'images/7.jpeg',
+    'images/8.jpeg',
+    'images/9.jpeg',
+    'images/10.jpeg',
+    'images/11.jpg',
+    'images/12.jpg',
+    'images/13.jpg',
+    'images/14.jpg',
+    'images/15.jpg',
+    'images/16.jpg',
+    'images/17.jpg'
+    
+];
+
+const gallery = document.getElementById('gallery');
+
+
+function appendImages() {
+    gallery.innerHTML = ''; 
+    images.forEach(imageURL => {
+        const imageContainer = document.createElement('div');
+        imageContainer.classList.add('image-container');
+        const image = document.createElement('img');
+        image.src = imageURL;
+        image.alt = 'Image';
+        imageContainer.appendChild(image);
+        gallery.appendChild(imageContainer);
+    });
+}
+
+
+appendImages();
+
+
+let scrollAmount = 0;
+const scrollIncrement = 2; 
+const galleryWidth = gallery.scrollWidth;
+
+function autoScroll() {
+    scrollAmount += scrollIncrement;
+    if (scrollAmount >= galleryWidth) {
+        scrollAmount = 0;
+    }
+    gallery.scrollTo(scrollAmount, 0);
+}
+
+setInterval(autoScroll, 10); 
+
+</script>
+
+</body>
+
+</html>

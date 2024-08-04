@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  
+/* CSS for the parallax section */
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap');
+* {
+    margin:0;
+    padding:0;
+    font-family:'Poppins',sans-serif;
+}
+body {
+  background: #0a2a43;
+  min-height: 1500px; /* Adjust as needed */
+  position: relative;
+}
+section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+section:before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(to top, #0a2a43, transparent);
+  z-index: 10000;
+}
+section:after {
+  content: '';
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  background: #0a2a43;
+  z-index: 10000;
+  mix-blend-mode:color;
+}
+section img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+#text {
+  position: relative;
+  color: #fff;
+  font-size: 10em;
+  z-index: 1;
+}
+#road{
+    z-index:2;
+}
+
+/* CSS for the authorized section */
+#authorized {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 1000;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#authorized h3 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+#authorized p {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+#authorized hr {
+  width: 50%;
+  border: 1px solid white;
+  margin-top: auto;
+}
+.section2 {
+  background-color: #0a2a43;
+  color: #fff;
+  padding: 50px 0;
+}
+
+.content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.section2 p {
+  font-size: 1.5em;
+}
+
+.section2 h2 {
+  font-size: 1.8em;
+  margin-top: 20px;
+}
+
+.section2 ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.section2 ul li {
+  font-size: 1.2em;
+  margin-top: 10px;
+}
+
+.section2 p ul li {
+  margin-bottom: 10px;
+}
+
+/* CSS for the navigation bar */
+.menu-btn {
+   background-color: #040008;
+   color: white;
+   padding: 16px;
+   font-size: 20px;
+   font-weight: bolder;
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   border: none;
+   cursor: pointer; /* Added cursor pointer */
+}
+.dropdown-menu {
+   position: relative;
+   display: inline-block;
+}
+.menu-content {
+   display: none;
+   position: absolute;
+   background-color: #017575;
+   min-width: 160px;
+   z-index: 1;
+}
+nav{
+   background-color: #017575;
+}
+.links, .links-hidden{
+   display: block; /* Changed display to block */
+   color: rgb(255, 255, 255);
+   padding: 12px 16px;
+   text-decoration: none;
+   font-size: 18px;
+   font-weight: bold;
+}
+.links-hidden {
+   display: none; /* Initially hide the hidden links */
+}
+.links:hover {
+   background-color: rgb(8, 107, 46);
+}
+.dropdown-menu:hover .menu-content {
+   display: block;
+}
+.dropdown-menu:hover .menu-btn {
+   background-color: #3e8e41;
+}
+/* Added media query for responsiveness */
+@media screen and (min-width: 768px) {
+   .links, .links-hidden {
+      display: inline-block; /* Display links inline on larger screens */
+   }
+   .menu-btn {
+      padding: 12px 16px; /* Reduced padding for smaller screens */
+   }
+}
+hr {  
+  height: 4px;  
+  background-color: white;  
+  border: none;  
+}  
+</style>
+</head>
+<body>
+    
+  <section>
+    <img src="images/bg.jpg" id="bg">
+    <img src="images/moon.png" id="moon">
+    <img src="images/mountain.png" id="mountain">
+    <img src="images/road.png" id="road">
+    <h2 id="text">Welcome</h2>
+  </section>
+
+  <!-- New elements -->
+  <div id="logo">
+    <img src="images/LOGO.png" alt="Your Logo">
+  </div>
+
+  <section class="authorized-section">
+    <div id="authorized">
+      <h3>Welcome to the Authorized Page</h3>
+      <p>Here you can find functionalities specific to authorized users.</p>
+     
+      <hr>
+    </div>
+  </section>
+
+  <section class="section2">
+    <div class="content">
+      <p>You have access to view and edit various tables related to celestial bodies, space missions, and organizations.</p>
+      <hr><h2>What You Can Do:</h2>
+      <ul>
+        <li>View information from different tables such as celestial bodies, black holes, comets, etc.</li>
+        <li>Edit existing data in the tables.</li>
+        <li>Add new data to the tables.</li>
+        <li>Log off from your account.</li>
+      </ul>
+    </div>
+  </section>
+  <hr>
+
+  
+  <nav>
+    <a class="links" href="a2.html">Home</a>
+    <a class="links" href="dummy_view.html">View</a>
+    <div class="dropdown-menu">
+      <button class="menu-btn">Add &lt;</button>
+      <div class="menu-content">
+        <a class="links-hidden" href="ac.html">Add Celestial Body</a>
+        <a class="links-hidden" href="add_s.html">Add Satellite</a>
+        <a class="links-hidden" href="add_astronomicalevents.php">Add Astronomical Events</a>
+        <a class="links-hidden" href="add_sw.php">Add Space Weather</a>
+        <a class="links-hidden" href="add_sm.php">Add Space Missions</a>
+        <a class="links-hidden" href="add_so.php">Add Space Organisations</a>
+        <a class="links-hidden" href="add_se.php">Add Space Education</a>
+        
+      </div>
+    </div>
+    <div class="dropdown-menu">
+      <button class="menu-btn">Edit &lt;</button>
+      <div class="menu-content">
+        <a class="links-hidden" href="edit_cb.html">Edit Celestial Bodies</a>
+        <a class="links-hidden" href="edit_sat.html">Edit Satellite</a>
+        <a class="links-hidden" href="edit_ae.html">Edit Astronomical Events</a>
+        <a class="links-hidden" href="edit_comet.html">Edit Comets  </a>
+        <a class="links-hidden" href="edit_bh.html">Edit Black Hole</a>
+        <a class="links-hidden" href="edit_am.html">Edit Asteroid and Meteors</a>
+        <a class="links-hidden" href="edit_g.html">Edit Galaxy</a>
+        <a class="links-hidden" href="edit_sw.html">Edit Space Weather</a>
+        <a class="links-hidden" href="edit_sm.html">Edit Space Missions</a>
+        <a class="links-hidden" href="edit_so.html">Edit Space Organisations</a>
+        <a class="links-hidden" href="edit_se.html">Edit Space Education</a>
+      </div>
+    </div>
+    <a class="links" href="u_cb.html">Update Celestial Body</a>
+    <a class="links" href="home.html">Logout</a>
+  </nav>
+
+  <script type="text/javascript">
+    let bg = document.getElementById("bg");
+    let moon = document.getElementById("moon");
+    let mountain = document.getElementById("mountain");
+    let road = document.getElementById("road");
+    let text = document.getElementById("text");
+
+    window.addEventListener('scroll', function() {
+      var value = window.scrollY;
+      bg.style.top = value * 0.5 + 'px';
+      moon.style.left = -value * 0.5 + 'px';
+      mountain.style.top = -value * 0.15 + 'px';
+      road.style.top = value * 0.15 + 'px';
+      text.style.top = value * 1 + 'px';
+    });
+
+   
+    document.querySelectorAll('.dropdown-menu').forEach(dropDown => {
+      dropDown.addEventListener('click', function() {
+        this.querySelector('.menu-content').classList.toggle('show');
+      });
+    });
+
+    
+    window.addEventListener('click', function(event) {
+      if (!event.target.matches('.menu-btn')) {
+        var dropdowns = document.querySelectorAll(".menu-content");
+        dropdowns.forEach(content => {
+          if (content.classList.contains('show')) {
+            content.classList.remove('show');
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

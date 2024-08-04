@@ -1,0 +1,245 @@
+CREATE DATABASE space_dbms1;
+
+CREATE TABLE celestial_bodies (
+    id INT AUTO_INCREMENT NOT NULL PRIMARY KEY ,
+    name VARCHAR(300) NOT NULL UNIQUE,
+    type VARCHAR(300),
+    mass FLOAT,
+    size FLOAT,
+    composition VARCHAR(1000),
+    orbital_parameters VARCHAR(1000)
+   
+);
+
+CREATE TABLE black_holes 
+(     id INT AUTO_INCREMENT  PRIMARY KEY,  
+   name VARCHAR(300) NOT NULL unique,    
+   mass FLOAT,     
+   size FLOAT,    
+   spectral_class VARCHAR(300),   
+   description VARCHAR(1000),    
+   FOREIGN KEY (id) REFERENCES celestial_bodies(id) ON DELETE CASCADE );
+
+CREATE TABLE comet (
+    comet_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    name VARCHAR(300) NOT NULL UNIQUE,
+    comet_text VARCHAR(1000),
+    time_stamp TIMESTAMP,
+    FOREIGN KEY (comet_id) REFERENCES celestial_bodies(id) ON DELETE CASCADE
+);
+
+CREATE TABLE asteroids_meteors (
+    id INT AUTO_INCREMENT NOT NULL,
+    name VARCHAR(300) NOT NULL UNIQUE,
+    mass FLOAT,
+    size FLOAT,
+    composition VARCHAR(1000),
+    orbital_details VARCHAR(1000),
+    description VARCHAR(1000),
+    FOREIGN KEY (id) REFERENCES celestial_bodies(id) ON DELETE CASCADE
+);
+
+CREATE TABLE galaxies (
+    id INT  AUTO_INCREMENT NOT NULL,
+    name VARCHAR(300) NOT NULL UNIQUE,
+    type VARCHAR(300),
+    size FLOAT,
+    description VARCHAR(1000),
+    FOREIGN KEY (id) REFERENCES celestial_bodies(id) ON DELETE CASCADE
+);
+
+CREATE TABLE satellite (
+    s_id INT  AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    name VARCHAR(300) NOT NULL UNIQUE,
+    launch_date DATE,
+    purpose VARCHAR(3000),
+    orbital_type VARCHAR(3000),
+    orbital_period VARCHAR(3000),
+    launch_vehicle VARCHAR(3000),
+    mass VARCHAR(3000),
+    time_stamp TIMESTAMP,
+    celestial_body_id INT,
+    FOREIGN KEY (celestial_body_id) REFERENCES celestial_bodies(id) ON DELETE CASCADE
+);
+
+CREATE TABLE astronomical_events (
+    event_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    type VARCHAR(100),
+    date DATE,
+    location VARCHAR(100),
+    time_stamp TIMESTAMP,
+    description VARCHAR(255),
+    celestial_body_id INT,
+    FOREIGN KEY (celestial_body_id) REFERENCES celestial_bodies(id) ON DELETE CASCADE
+);
+
+CREATE TABLE space_weather (
+    w_id INT  AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    type VARCHAR(50),
+    date DATE,
+    intensity VARCHAR(20),
+    time_stamp TIMESTAMP,
+    description VARCHAR(255),
+    celestial_body_id INT,
+    FOREIGN KEY (celestial_body_id) REFERENCES celestial_bodies(id) ON DELETE CASCADE
+);
+
+CREATE TABLE space_missions (
+    mission_id INT  AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    name VARCHAR(300) NOT NULL unique,
+    launch_date DATE,
+    end_date DATE,
+    time_stamp TIMESTAMP,
+    objective VARCHAR(255),
+    destination VARCHAR(100),
+    space_craft VARCHAR(100),
+    type VARCHAR(200),
+    outcome VARCHAR(100),
+    details VARCHAR(255),
+    satellite_id INT,
+    celestial_body_id INT,
+    FOREIGN KEY (satellite_id) REFERENCES satellite(s_id) ON DELETE CASCADE,
+    FOREIGN KEY (celestial_body_id) REFERENCES celestial_bodies(id) ON DELETE CASCADE 
+);
+
+CREATE TABLE space_organisation (
+    org_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    name VARCHAR(150) NOT NULL unique,
+    country VARCHAR(100),
+    established_date DATE,
+    partnership VARCHAR(150),
+    projects INT NOT NULL,
+    satellite_id INT,
+    url VARCHAR(255) NOT NULL,
+    FOREIGN KEY (satellite_id) REFERENCES satellite(s_id) ON DELETE CASCADE
+);
+
+CREATE TABLE space_education (
+    content_id INT  AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    type VARCHAR(30),
+    title VARCHAR(255),
+    published_date DATE,
+    level VARCHAR(30),
+    description VARCHAR(255),
+    url VARCHAR(255),
+    celestial_body_id INT,
+    FOREIGN KEY (celestial_body_id) REFERENCES celestial_bodies(id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE users (
+    user_id INTEGER  AUTO_INCREMENT PRIMARY KEY,
+    username TEXT NOT NULL,
+    password TEXT NOT NULL,
+    user_type TEXT NOT NULL,
+    auth_code INTEGER,
+    FOREIGN KEY (auth_code) REFERENCES space_organisation(org_id)
+);
+
+ 
+ INSERT INTO celestial_bodies (name, type)
+VALUES 
+('Sagittarius A*','Black Hole'),
+('Cygnus X-1','Black Hole'),
+('Messier 87', 'Black Hole'),
+('TON 618','Black Hole'),
+('SDSS J0100+2802', 'Black Hole');
+
+INSERT INTO black_holes (id, name, mass, size, spectral_class, description) 
+VALUES 
+(1, 'Sagittarius A*', 4.31e6, NULL, 'N/A', 'Located at the center of the Milky Way'),
+(2, 'M87*', 6.5e9, NULL, 'N/A', 'Located in the center of the M87 galaxy'),
+(3, 'Cygnus X-1', 15, NULL, 'N/A', 'First black hole discovered via X-ray emissions'),
+(4, 'V404 Cygni', 9, NULL, 'N/A', 'Forms binary system with a companion star'),
+(5, 'Messier 87*', 6.5e9, NULL, 'N/A', 'Located in the center of the M87 galaxy');
+
+INSERT INTO celestial_bodies (name,type) 
+VALUES 
+( 'Halley', 'Comet'),
+('Hale-Bopp', 'Comet'),
+('Hyakutake','Comet'),
+('Lovejoy', 'Comet'),
+('Encke', 'Comet');
+
+INSERT INTO comet (comet_id, name, comet_text, time_stamp) 
+VALUES 
+(11, 'Halley', 'Periodic comet visible from Earth', NOW()),
+(12, 'Hale-Bopp', 'One of the most widely observed comets', NOW()),
+(13, 'Hyakutake', 'Bright comet visible in 1996', NOW()),
+(14, 'Lovejoy', 'Discovered by amateur astronomer', NOW()),
+(15, 'Encke', 'Short-period comet', NOW());
+
+INSERT INTO celestial_bodies (name,type) 
+VALUES 
+('Ceres', 'Asteroid'),
+( 'Vesta', 'Asteroid'),
+('Chicxulub', 'Asteroid'),
+('Apophis','Asteroid'),
+( 'Bennu','Asteroid');
+
+INSERT INTO asteroids_meteors (id, name, mass, size, composition, orbital_details, description) 
+VALUES 
+(1, 'Ceres', 9.393e20, 939.4, 'Water ice, silicates, carbonates', 'Main belt asteroid', 'Largest object in the asteroid belt'),
+(2, 'Vesta', 2.59076e20, 525.4, 'Basaltic rock, olivine, pyroxene', 'Main belt asteroid', 'Second-largest object in the asteroid belt'),
+(3, 'Chicxulub', 2.4e17, NULL, 'Rock, metal', NULL, 'Impact caused mass extinction event'),
+(4, 'Apophis', 2.7e10, 370, 'Stony, nickel, iron', 'Potentially Hazardous Asteroid', 'Close approach to Earth in 2029'),
+(5, 'Bennu', 7.329e10, 487.5, 'Carbonaceous material', 'Near-Earth asteroid', 'Sampled by NASA\'s OSIRIS-REx mission');
+
+INSERT INTO celestial_bodies (name,type) 
+VALUES 
+( 'Milky Way', 'Galaxy'),
+( 'Andromeda', 'Galaxy'),
+( 'Triangulum', 'Galaxy'),
+( 'Sombrero','Galaxy'),
+('Messier 871', 'Galaxy');
+
+INSERT INTO galaxies (id, name, type, size, description) 
+VALUES 
+(26, 'Milky Way', 'Spiral', NULL, 'Our home galaxy'),
+(27, 'Andromeda', 'Spiral', NULL, 'Closest spiral galaxy to the Milky Way'),
+(28, 'Triangulum', 'Spiral', NULL, 'Third-largest galaxy in the Local Group'),
+(29, 'Sombrero', 'Spiral', NULL, 'Known for its prominent dust lane'),
+(30, 'Messier 871', 'Elliptical', NULL, 'Contains a supermassive black hole at its center');
+
+INSERT INTO satellite (s_id, name, launch_date, purpose, orbital_type, orbital_period, launch_vehicle, mass, time_stamp, celestial_body_id)
+VALUES
+(1, 'Hubble Space Telescope', '1990-04-24', 'Astronomical observation', 'Low Earth Orbit', '95 minutes', 'Space Shuttle Discovery', '11100 kg', CURRENT_TIMESTAMP, 2),
+(2, 'International Space Station', '1998-11-20', 'Space research, international cooperation', 'Low Earth Orbit', '92 minutes', 'Space Shuttle Endeavour', '420000 kg', CURRENT_TIMESTAMP, 2),
+(3, 'Tiangong Space Station', '2021-04-29', 'Space science, technology development', 'Low Earth Orbit', '90 minutes', 'Long March 5B', '220000 kg', CURRENT_TIMESTAMP, 2),
+(4, 'GPS Block IIF', '2010-05-27', 'Navigation', 'Medium Earth Orbit', '12 hours', 'Delta IV', '1630 kg', CURRENT_TIMESTAMP, NULL),
+(5, 'Landsat 8', '2013-02-11', 'Earth observation', 'Sun-synchronous orbit', '16 days', 'Atlas V 401', '2780 kg', CURRENT_TIMESTAMP, NULL);
+
+
+INSERT INTO astronomical_events (event_id, type, date, location, description, celestial_body_id)
+VALUES
+(1, 'Solar Eclipse', '2023-10-14', 'Visible from South America', 'Total solar eclipse where the Moon fully covers the Sun', 2),
+(2, 'Perseids Meteor Shower', '2023-08-13', 'Visible from Northern Hemisphere', 'Annual meteor shower associated with comet Swift-Tuttle', NULL),
+(3, 'Transit of Mercury', '2023-11-13', 'Visible from parts of Europe, Africa, and Asia', 'Mercury passes directly between Earth and the Sun', 2),
+(4, 'Supermoon', '2023-06-14', 'Visible from various locations', 'Full moon occurs when the Moon is closest to Earth in its orbit', NULL),
+(5, 'Asteroid 2023 TX2 Flyby', '2023-09-20', 'Close approach to Earth', 'Near-Earth asteroid makes a close pass by our planet', NULL);
+
+
+INSERT INTO space_missions (name, launch_date, end_date, objective, destination, space_craft, type, outcome, details, satellite_id, celestial_body_id)
+VALUES 
+('Solar Probe Plus', '2020-08-12', null, 'Study the outer corona of the Sun and understand its influence on space weather', 'Sun', 'Solar Probe Plus Spacecraft', 'Solar Exploration', 'Ongoing', 'Solar Probe Plus will make multiple close approaches to the Sun, coming within 4 million miles of its surface.', NULL, 1),
+('Artemis III', '2024-11-20', NULL, 'Return humans to the surface of the Moon for the first time since Apollo 17', 'Moon', 'Orion Spacecraft, HLS', 'Lunar Exploration', 'Planned', 'Artemis III aims to land astronauts near the lunar south pole to explore and study the region.', NULL, 3),
+('Lunar Reconnaissance Orbiter', '2009-06-18', null, 'Map the surface of the Moon and search for potential landing sites for future missions', 'Moon', 'Lunar Reconnaissance Orbiter', 'Lunar Exploration', 'Ongoing', 'LRO has provided detailed maps of the lunar surface and identified resources that could support future lunar missions.', NULL, 3),
+('Juno', '2011-08-05', null, 'Study Jupiter\'s composition, gravity field, magnetic field, and polar magnetosphere', 'Jupiter', 'Juno Spacecraft', 'Planetary Exploration', 'Ongoing', 'Juno is helping scientists better understand Jupiter\'s atmospheric dynamics and interior structure.', NULL, 4),
+('Mars Science Laboratory', '2011-11-26', null, 'Assess whether Mars ever had an environment capable of supporting microbial life', 'Mars', 'Curiosity Rover', 'Mars Exploration', 'Ongoing', 'Curiosity has discovered evidence of past water activity on Mars and continues to study the planet\'s geology and climate.', NULL, 5);
+
+INSERT INTO space_organisation (name, country, established_date, partnership, projects, satellite_id, url)
+VALUES 
+('NASA', 'United States', '1958-07-29', 'International Space Station, European Space Agency, SpaceX', 100, NULL, 'https://www.nasa.gov/'),
+('European Space Agency', 'European Union', '1975-05-30', 'NASA, Russian Space Agency', 80, NULL, 'https://www.esa.int/'),
+('SpaceX', 'United States', '2002-03-14', 'NASA, International Space Station', 60, NULL, 'https://www.spacex.com/'),
+('Roscosmos', 'Russia', '1992-01-25', 'ESA, NASA, China National Space Administration', 60, NULL, 'https://www.roscosmos.ru/'),
+('China National Space Administration', 'China', '1993-04-24', 'ESA, Roscosmos', 70, NULL, 'http://www.cnsa.gov.cn/');
+
+
+INSERT INTO space_education (type, title, published_date, level, description, url, celestial_body_id)
+VALUES 
+('Article', 'Understanding the Sun: Structure and Features', '2022-01-15', 'Intermediate', 'An in-depth exploration of the Sun\'s layers and phenomena such as sunspots and solar flares.', 'https://www.example.com/sun-structure-features', 1),
+('Video', 'Exploring the Moon: Apollo Missions', '2021-07-20', 'Intermediate', 'A documentary on the Apollo missions to the Moon, featuring interviews with astronauts and footage from the missions.', 'https://www.example.com/exploring-moon-apollo-missions', 3),
+('Book', 'Jupiter: King of the Gas Giants', '2023-03-10', 'Advanced', 'A comprehensive guide to Jupiter\'s formation, atmosphere, and moons, written by leading planetary scientists.', 'https://www.example.com/jupiter-gas-giants-book', 4),
+('Online Course', 'Mars: The Red Planet Unveiled', '2022-11-05', 'Advanced', 'An interactive course covering the latest discoveries and theories about Mars, including the search for signs of past life.', 'https://www.example.com/mars-red-planet-course', 5),
+('Interactive Module', 'Touring the Solar System', '2023-09-01', 'Beginner', 'An interactive module that allows users to explore the planets, moons, and other celestial bodies in our Solar System.', 'https://www.example.com/touring-solar-system', NULL);

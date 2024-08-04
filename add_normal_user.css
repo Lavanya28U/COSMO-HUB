@@ -1,0 +1,211 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+	font-family: 'Lemon', serif;
+	background: black
+}
+
+.section-header {
+    margin-top: 50px;
+    margin-bottom: 60%; /* Add margin-bottom to create space below the images/icons */
+    position: absolute;
+    text-align: center;
+}
+
+
+section {
+    overflow: hidden;
+    position: relative;
+}
+
+a, a:link, a:visited {
+    color: #212121;
+    text-decoration: none;
+}
+
+.Carousel-slider {
+    height: 700px;
+    position: relative;
+    width: 100%;
+}
+
+.Carousel-slider.fullwidth {
+    height: 500px;
+}
+
+.Carousel-slider.fullwidth .slider-item {
+    height: 480px;
+    line-height: 480px;
+    width: 100%
+}
+
+.slider-wrapper {
+    overflow: hidden;
+    position: relative;
+    transform-style: preserve-3d;
+    transform-origin: 0 50%;
+	perspective: 800px !important;
+}
+
+.slider-item {
+    display: none;
+    width: 350px;
+    height: 350px;
+    left: 20px;
+    position: absolute;
+    text-align: relative;
+    top: 0;
+    cursor: pointer;
+}
+
+.indicators {
+	bottom: 0;
+    left: 50%;
+    padding: 0;
+    list-style-type: none;
+    margin: 40px 0 0 -77px;
+    position: absolute;
+}
+
+.indicators li {
+    float: left;
+    height: 16px;
+    margin-right: 8px;
+    text-align: center;
+    width: 16px;
+}
+
+.indicators li:last-child {margin: 0;}
+.indicators a {
+    background: #fff;
+    border-radius: 8px;
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+}
+
+.indicators .active a {
+	background: #f8d326;
+}
+
+.comet:after {
+    content: 'Comet';
+    color: #fff;
+    position: absolute;
+    bottom: 1%; 
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 30px;
+}
+.cel:after {
+    content: 'Celestial';
+    color: #fff;
+    position: absolute;
+    bottom: 1%; 
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 30px;
+}
+.gal:after {
+    content: 'Galaxy';
+    color: #fff;
+    position: absolute;
+    bottom: 20px; 
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 30px;
+}
+.blackhole:after {
+    content: 'Black Hole';
+    color: #fff;
+    position: absolute;
+    bottom: 20px; 
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 30px;
+}
+.sat:after {
+    content: 'Satellite';
+    color: #fff;
+    position: absolute;
+    bottom: 20px; 
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 30px;
+}
+.se:after {
+    content: 'Space Education';
+    color: #fff;
+    position: absolute;
+    bottom: 20px; 
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 30px;
+}
+.ast:after {
+    content: 'Astronomical Events';
+    color: #fff;
+    position: absolute;
+    bottom: 20px; 
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 30px;
+}
+.aste:after {
+    content: 'Asteroids';
+    color: #fff;
+    position: absolute;
+    bottom: 20px; 
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 30px;
+}
+.sw:after {
+    content: 'Space Weather';
+    color: #fff;
+    position: absolute;
+    bottom: 20px; 
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 30px;
+}
+.so:after {
+    content: 'Space Organisation';
+    color: #fff;
+    position: absolute;
+    bottom: 1px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 30px;
+}
+.sm:after {
+    content: 'Space Missions';
+    color: #fff;
+    position: absolute;
+    bottom: 20px; 
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 30px;
+}
+.comet, .cel, .gal, .blackhole, .sat, .se, .ast, .aste, .sw, .so, .sm {
+    width: 500px; 
+    height: 500px; 
+}
+h1{
+    text-align: center;
+    color:#fff;
+    font-size:50px;
+}
+
+.comet {background-image: url(images/comet.png);background-size: cover;}
+.ast {background: url(images/ast.png);background-size: cover;}
+.aste {background: url(images/asteroids.png);background-size: cover;}
+.gal {background: url(images/galaxy.png);background-size: cover;}
+.sat {background: url(images/satellite.png);background-size: cover;}
+.cel {background: url(images/celestial.png);background-size: cover;}
+.sm {background: url(images/space\ missions.png);background-size: cover;}
+.se {background: url(images/space\ edu.png);background-size: cover;}
+.so {background: url(images/space\ org.png);background-size: cover;}
+.sw {background: url(images/space\ weather.png);background-size: cover;}
+.blackhole {background: url(images/blackhole.png);background-size: cover;}

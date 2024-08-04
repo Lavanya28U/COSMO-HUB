@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Multiple Add Options</title>
+	<link rel="stylesheet" href="add_normal_user.css">
+	<link href="https://fonts.googleapis.com/css2?family=Lemon&display=swap" rel="stylesheet">
+</head>
+<body>
+<h1> MULTIPLE ADD OPTIONS</h1>
+<div id="Carousel-slider">
+	<section>
+		<div class="Carousel-slider">
+			
+			<div class="slider-item comet" data-href="addcomet1.php"></div>
+			<div class="slider-item ast" data-href="addam.php"></div>
+			<div class="slider-item aste" data-href="add_astronomicalevents.php"></div>
+			<div class="slider-item sat" data-href="add_s.html"></div>
+			<div class="slider-item sw" data-href="add_spaceweather.php"></div>
+			<div class="slider-item se" data-href="add_spaceeducation.php"></div>
+			<div class="slider-item so" data-href="add_spaceorganisation.php"></div>
+			<div class="slider-item sm" data-href="add_spacemisssions.php"></div>
+			<div class="slider-item gal" data-href="addg.php"></div>
+			<div class="slider-item cel" data-href="ac.html"></div>
+			<div class="slider-item blackhole" data-href="ab.php"></div>
+			
+		</div>
+	</section>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/micro-slider@1.0.9/dist/micro-slider.min.js"></script>
+<script  >
+	document.addEventListener('DOMContentLoaded', () => {
+  
+		
+		  const CaroS = document.querySelector('.Carousel-slider');
+		  const CaroSlider = new MicroSlider(CaroS, { indicators: true, indicatorText: '' });
+		  const hammer = new Hammer(CaroS);
+		  const CaroSTimer = 2000;
+		  let CaroAutoplay = setInterval(() => CaroSlider.next(), CaroSTimer);
+		
+		
+		  hammer.on('swipe', function(e) {
+			  clearInterval(CaroAutoplay); 
+			  CaroAutoplay = setInterval(() => CaroSlider.next(), CaroSTimer);
+			  console.log(e.type + ' gesture detected');
+		  });
+	  
+		let slideLink = document.querySelectorAll('.slider-item');
+		if (slideLink && slideLink !== null && slideLink.length > 0){
+		  slideLink.forEach( el => el.addEventListener('click', e => {
+			e.preventDefault();
+			let href = el.dataset.href;
+			let target = el.dataset.target;
+			if (href !== '#') window.open(href, target);
+		  }));
+		}
+		
+	
+		
+	  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Satellite</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        h2 {
+            text-align: center;
+
+        }
+
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Add Satellite</h2>
+    <form action="insert.php" method="POST">
+        <label for="satellite_name">Name:</label><br>
+        <input type="text" id="satellite_name" name="satellite_name" required><br>
+
+        <label for="launch_date">Launch Date:</label><br>
+        <input type="date" id="launch_date" name="launch_date" required><br>
+
+        <label for="purpose">Purpose:</label><br>
+        <textarea id="purpose" name="purpose" rows="4" required></textarea><br>
+
+        <label for="orbital_type">Orbital Type:</label><br>
+        <input type="text" id="orbital_type" name="orbital_type" required><br>
+
+        <label for="orbital_period">Orbital Period:</label><br>
+        <input type="text" id="orbital_period" name="orbital_period" required><br>
+
+        <label for="launch_vehicle">Launch Vehicle:</label><br>
+        <input type="text" id="launch_vehicle" name="launch_vehicle" required><br>
+
+        <label for="satellite_mass">Mass:</label><br>
+        <input type="text" id="satellite_mass" name="satellite_mass" required><br>
+
+        <label for="celestial_body_id">Celestial Body ID:</label><br>
+        <input type="number" id="celestial_body_id" name="celestial_body_id" required><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</div>
+</body>
+</html>

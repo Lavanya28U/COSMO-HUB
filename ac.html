@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Celestial Body</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background: url('data:image/svg+xml;utf8,<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M6 9l6 6 6-6H6z"/></svg>') no-repeat right 10px center/12px;
+            padding-right: 40px;
+        }
+        textarea {
+            height: 100px;
+        }
+        input[type="submit"],
+        input[type="button"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover,
+        input[type="button"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add Celestial Body</h1>
+    <form action="ad.php" method="POST">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br>
+        
+        <label for="type">Type:</label><br>
+        <select id="type" name="type" onchange="checkOther()">
+            <option value="comet">Comet</option>
+            <option value="galaxy">Galaxy</option>
+            <option value="asteroid">Asteroid</option>
+            <option value="meteorite">Meteorite</option>
+            <option value="black hole">Black Hole</option>
+            <option value="other">Other</option>
+        </select><br>
+        
+        <div id="otherType" style="display: none;">
+            <label for="otherTypeInput">Other Type:</label><br>
+            <input type="text" id="otherTypeInput" name="otherType"><br>
+        </div>
+        
+        <label for="mass">Mass:</label><br>
+        <input type="number" id="mass" name="mass"><br>
+        
+        <label for="size">Size:</label><br>
+        <input type="number" id="size" name="size"><br>
+        
+        <label for="composition">Composition:</label><br>
+        <textarea id="composition" name="composition"></textarea><br>
+        
+        <label for="orbital_parameters">Orbital Parameters:</label><br>
+        <textarea id="orbital_parameters" name="orbital_parameters"></textarea><br>
+        
+        <input type="submit" value="Submit">
+        <input type="button" value="Clear" onclick="clearForm()">
+    </form>
+
+    <script>
+        function checkOther() {
+            var typeSelect = document.getElementById("type");
+            var otherTypeInput = document.getElementById("otherType");
+            if (typeSelect.value === "other") {
+                otherTypeInput.style.display = "block";
+            } else {
+                otherTypeInput.style.display = "none";
+            }
+        }
+
+        function clearForm() {
+            document.getElementById("name").value = "";
+            document.getElementById("type").value = "";
+            document.getElementById("otherTypeInput").value = "";
+            document.getElementById("mass").value = "";
+            document.getElementById("size").value = "";
+            document.getElementById("composition").value = "";
+            document.getElementById("orbital_parameters").value = "";
+        }
+    </script>
+</body>
+</html>

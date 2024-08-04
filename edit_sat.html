@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edit Satellite</title>
+</head>
+<body>
+<h1>Edit Satellite</h1>
+<form id="editSatellite" method="post" action="save_sat.php">
+    <label for="name">Satellite Name:</label>
+    <input type="text" id="name" name="name">
+    <button type="button" onclick="searchSatellite()">Search</button>
+    <br><br>
+    <div id="SatelliteFields" style="display: none;">
+        <label for="launch_date">Launch Date:</label>
+        <input type="date" id="launch_date" name="launch_date"><br>
+        <label for="purpose">Purpose:</label>
+        <textarea id="purpose" name="purpose"></textarea><br>
+        <label for="orbital_type">Orbital Type:</label>
+        <input type="text" id="orbital_type" name="orbital_type"><br>
+        <label for="orbital_period">Orbital Period:</label>
+        <input type="text" id="orbital_period" name="orbital_period"><br>
+        <label for="launch_vehicle">Launch Vehicle:</label>
+        <input type="text" id="launch_vehicle" name="launch_vehicle"><br>
+        <label for="mass">Mass:</label>
+        <input type="text" id="mass" name="mass"><br>
+        <label for="celestial_body_id">Celestial Body:</label>
+        <select id="celestial_body_id" name="celestial_body_id">
+           
+        </select><br>
+        <button type="submit">Save Changes</button>
+        <button type="button" onclick="clearFields()">Clear</button>
+    </div>
+    <div id="errorMessage" style="color: red; display: none;">Satellite not found.</div>
+</form>
+
+<script>
+    function searchSatellite() {
+        var sname = document.getElementById("name").value;
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "get_sat.php?name=" + sname, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    populateFields(response.satellite);
+                    populateCelestialBodies(response.celestial_bodies);
+                    document.getElementById("SatelliteFields").style.display = "block";
+                    document.getElementById("errorMessage").style.display = "none";
+                } else {
+                    document.getElementById("errorMessage").style.display = "block";
+                    document.getElementById("SatelliteFields").style.display = "none";
+                }
+            }
+        };
+        xhr.send();
+    }
+
+    function populateFields(satellite) {
+        document.getElementById("name").value = satellite.name;
+        document.getElementById("name").readOnly = true; 
+        document.getElementById("launch_date").value = satellite.launch_date;
+        document.getElementById("purpose").value = satellite.purpose;
+        document.getElementById("orbital_type").value = satellite.orbital_type;
+        document.getElementById("orbital_period").value = satellite.orbital_period;
+        document.getElementById("launch_vehicle").value = satellite.launch_vehicle;
+        document.getElementById("mass").value = satellite.mass;
+       
+        document.getElementById("celestial_body_id").value = satellite.celestial_body_id;
+    }
+
+    function populateCelestialBodies(celestial_bodies) {
+        var select = document.getElementById("celestial_body_id");
+        select.innerHTML = ""; 
+        celestial_bodies.forEach(function(body) {
+            var option = document.createElement("option");
+            option.value = body.id;
+            option.text = body.name;
+            select.appendChild(option);
+        });
+    }
+
+    function clearFields() {
+        document.getElementById("editSatellite").reset();
+        document.getElementById("SatelliteFields").style.display = "none";
+        document.getElementById("errorMessage").style.display = "none";
+    }
+</script>
+</body>
+</html>

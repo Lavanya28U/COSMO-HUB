@@ -1,0 +1,134 @@
+-- Additional insert statements for celestial_bodies table
+INSERT INTO celestial_bodies (name, type, mass, size, composition, orbital_parameters)
+VALUES 
+('Sagittarius A*', 'Black Hole', NULL, NULL, NULL, NULL),
+('Cygnus X-1', 'Black Hole', NULL, NULL, NULL, NULL),
+('Messier 87', 'Black Hole', NULL, NULL, NULL, NULL),
+('TON 618', 'Black Hole', NULL, NULL, NULL, NULL),
+('SDSS J0100+2802', 'Black Hole', NULL, NULL, NULL, NULL),
+('Halley', 'Comet', NULL, NULL, NULL, NULL),
+('Hale-Bopp', 'Comet', NULL, NULL, NULL, NULL),
+('Hyakutake', 'Comet', NULL, NULL, NULL, NULL),
+('Lovejoy', 'Comet', NULL, NULL, NULL, NULL),
+('Encke', 'Comet', NULL, NULL, NULL, NULL),
+('Ceres', 'Asteroid', NULL, NULL, NULL, NULL),
+('Vesta', 'Asteroid', NULL, NULL, NULL, NULL),
+('Chicxulub', 'Asteroid', NULL, NULL, NULL, NULL),
+('Apophis', 'Asteroid', NULL, NULL, NULL, NULL),
+('Bennu', 'Asteroid', NULL, NULL, NULL, NULL),
+('Milky Way', 'Galaxy', NULL, NULL, NULL, NULL),
+('Andromeda', 'Galaxy', NULL, NULL, NULL, NULL),
+('Triangulum', 'Galaxy', NULL, NULL, NULL, NULL),
+('Sombrero', 'Galaxy', NULL, NULL, NULL, NULL),
+('Messier 871', 'Galaxy', NULL, NULL, NULL, NULL);
+
+-- Additional insert statements for space_weather table
+INSERT INTO space_weather (type, date, intensity, description, celestial_body_id)
+VALUES 
+('Solar Flare', '2023-05-12', 'High', 'A powerful solar flare erupted from the Sun, causing radio blackouts and disruptions in satellite communications.', 1),
+('Geomagnetic Storm', '2022-11-20', 'Moderate', 'A geomagnetic storm resulted from interactions between the solar wind and Earth\'s magnetosphere, producing auroras at high latitudes.', 2),
+('Coronal Mass Ejection', '2024-02-03', 'Low', 'A coronal mass ejection occurred on the Sun, sending a massive cloud of charged particles into space.', 1),
+('Solar Wind Variation', '2023-09-08', 'Low', 'Variations in the speed and density of the solar wind were detected, affecting the outer regions of Earth\'s magnetosphere.', 1),
+('Cosmic Ray Surge', '2024-01-15', 'High', 'An increase in cosmic ray flux was observed, possibly due to a nearby supernova explosion.', NULL);
+
+-- Additional insert statements for users table
+INSERT INTO users (username, password, user_type, auth_code)
+VALUES 
+('astrofan123', 'password123', 'user', NULL),
+('spacegeek456', 'letmein', 'admin', 3),
+('galaxyexplorer789', '123456', 'user', NULL),
+('cosmicvoyager101', 'spacepassword', 'user', NULL),
+('starlover777', 'qwerty', 'admin', 1);
+
+
+
+-- Additional insert statements for satellite table
+INSERT INTO satellite (name, launch_date, purpose, orbital_type, orbital_period, launch_vehicle, mass, time_stamp, celestial_body_id)
+VALUES 
+('Hubble Space Telescope', '1990-04-24', 'Astronomical observation', 'Low Earth Orbit', '96 minutes', 'Space Shuttle Discovery', '11,110 kg', CURRENT_TIMESTAMP, NULL),
+('International Space Station', '1998-11-20', 'Research and international cooperation', 'Low Earth Orbit', '90 minutes', 'Space Shuttle Endeavour', '420,000 kg', CURRENT_TIMESTAMP, NULL),
+('Tiangong Space Station', '2021-04-29', 'Scientific research and space experiments', 'Low Earth Orbit', '90 minutes', 'Long March 5B', '66,000 kg', CURRENT_TIMESTAMP, NULL),
+('Kepler Space Observatory', '2009-03-07', 'Exoplanet hunting', 'Heliocentric Orbit', '372.5 days', 'Delta II', '1,039 kg', CURRENT_TIMESTAMP, NULL),
+('James Webb Space Telescope', '2021-12-18', 'Astronomical observation and deep space exploration', 'Lagrange Point 2 (L2)', '6 months', 'Ariane 5', '6,500 kg', CURRENT_TIMESTAMP, NULL);
+
+-- Additional insert statements for astronomical_events table
+INSERT INTO astronomical_events (type, date, location, description, celestial_body_id)
+VALUES 
+('Solar Eclipse', '2023-11-25', 'Various locations', 'A total solar eclipse will be visible from parts of South America and Antarctica.', 1),
+('Perseid Meteor Shower', '2022-08-12', 'Global', 'The annual Perseid meteor shower will peak, producing up to 100 meteors per hour.', NULL),
+('Transit of Mercury', '2023-11-13', 'Visible from Earth', 'Mercury will pass directly between the Earth and the Sun, appearing as a small black dot on the solar disk.', 2),
+('Opposition of Mars', '2025-12-08', 'Visible from Earth', 'Mars will be at its closest approach to Earth and will appear bright and red in the night sky.', 5),
+('Great Conjunction of Jupiter and Saturn', '2024-12-21', 'Visible from Earth', 'Jupiter and Saturn will appear close together in the sky, creating a rare celestial event known as the Great Conjunction.', NULL);
+
+-- Additional insert statements for space_dbms.space_education table
+INSERT INTO space_education (type, title, published_date, level, description, url, celestial_body_id)
+VALUES 
+('Article', 'Exploring the Hubble Space Telescope', '2023-08-15', 'Intermediate', 'Learn about the history and discoveries of the Hubble Space Telescope, including its role in expanding our understanding of the universe.', 'https://www.example.com/hubble-space-telescope', NULL),
+('Video', 'Inside the International Space Station', '2022-05-20', 'Intermediate', 'Take a virtual tour of the International Space Station and see how astronauts live and work in space.', 'https://www.example.com/international-space-station-tour', NULL),
+('Book', 'The Search for Extraterrestrial Life', '2024-02-29', 'Advanced', 'Delve into the scientific search for life beyond Earth, exploring the conditions necessary for life and the methods used to detect it.', 'https://www.example.com/search-for-extraterrestrial-life-book', NULL),
+('Online Course', 'Introduction to Rocket Science', '2023-10-10', 'Beginner', 'Discover the principles of rocket propulsion, orbital mechanics, and spacecraft design in this introductory course.', 'https://www.example.com/rocket-science-course', NULL),
+('Interactive Module', 'Exploring Exoplanets', '2024-06-05', 'Intermediate', 'Embark on a virtual journey to distant exoplanets and learn about their unique characteristics and potential for habitability.', 'https://www.example.com/exploring-exoplanets', NULL);
+
+
+-- Additional insert statements for black_holes table
+INSERT INTO black_holes (name, mass, size, spectral_class, description, id)
+VALUES 
+('Sagittarius A*', 4.31e6, NULL, 'Unknown', 'Supermassive black hole located at the center of the Milky Way galaxy.', 6),
+('Cygnus X-1', 14.8, NULL, 'Unknown', 'First black hole discovered to be orbiting a companion star.', 7),
+('Messier 87', 6.5e9, NULL, 'Unknown', 'Located at the center of the Messier 87 galaxy, known for the first image of a black hole.', 8),
+('TON 618', 66e9, NULL, 'Unknown', 'One of the most massive black holes known, located in the Ursa Major constellation.', 9),
+('SDSS J0100+2802', 12e9, NULL, 'Unknown', 'Quasar with one of the most massive known black holes, located in the constellation Leo.', 10);
+
+-- Additional insert statements for comet table
+INSERT INTO comet (name, comet_text, time_stamp, comet_id)
+VALUES 
+('Halley', 'Famous periodic comet visible from Earth approximately every 76 years.', CURRENT_TIMESTAMP, 11),
+('Hale-Bopp', 'Great Comet of 1997, one of the brightest comets visible in the 20th century.', CURRENT_TIMESTAMP, 12),
+('Hyakutake', 'Comet discovered in 1996, known for its exceptionally bright appearance.', CURRENT_TIMESTAMP, 13),
+('Lovejoy', 'Discovered in 2011, survived a close approach to the Sun.', CURRENT_TIMESTAMP, 14),
+('Encke', 'Short-period comet with one of the shortest orbital periods of any known comet.', CURRENT_TIMESTAMP, 15);
+
+-- Additional insert statements for asteroids_meteors table
+INSERT INTO asteroids_meteors (name, mass, size, composition, orbital_details, description, id)
+VALUES 
+('Ceres', 9.39e20, NULL, 'Water ice and rock', 'Main belt asteroid located between Mars and Jupiter.', 'Largest object in the asteroid belt, classified as a dwarf planet.', 16),
+('Vesta', 2.59e20, NULL, 'Silicate rock', 'Second-largest object in the asteroid belt.', 'One of the brightest objects in the asteroid belt, with a differentiated interior.', 17),
+('Chicxulub', 1e15, NULL, 'Rock', 'Located near the Yucatán Peninsula in Mexico.', 'Impact event associated with the mass extinction event that wiped out the dinosaurs.', 18),
+('Apophis', 2.7e10, NULL, 'Rock', 'Near-Earth asteroid with a close approach to Earth.', 'Subject of scientific interest due to its close approaches to Earth and potential impact hazard.', 19),
+('Bennu', 7.33e10, NULL, 'Carbonaceous material', 'Near-Earth asteroid visited by the OSIRIS-REx spacecraft.', 'Target of the OSIRIS-REx mission, aiming to return a sample of its surface material to Earth.', 20);
+
+-- Additional insert statements for galaxies table
+INSERT INTO galaxies (name, type, size, description, id)
+VALUES 
+('Milky Way', 'Barred spiral galaxy', 100000, 'Home to the Solar System and billions of stars, planets, and other celestial objects.', 26),
+('Andromeda', 'Spiral galaxy', 220000, 'The nearest spiral galaxy to the Milky Way, expected to collide with our galaxy in the distant future.', 27),
+('Triangulum', 'Spiral galaxy', 60000, 'Third-largest galaxy in the Local Group, located approximately 3 million light-years from Earth.', 28),
+('Sombrero', 'Lenticular galaxy', 50000, 'Known for its prominent dust lane resembling the brim of a sombrero hat.', 29),
+('Messier 871', 'Elliptical galaxy', 150000, 'Located in the Virgo Cluster, known for its complex network of dust lanes and star-forming regions.', 30);
+
+-- Additional insert statements for space_missions table
+INSERT INTO space_missions (name, launch_date, end_date, objective, destination, space_craft, type, outcome, details, satellite_id, celestial_body_id)
+VALUES 
+('Apollo 11', '1969-07-16', '1969-07-24', 'First crewed mission to land on the Moon', 'Moon', 'Apollo Lunar Module', 'Lunar Exploration', 'Success', 'Neil Armstrong and Buzz Aldrin became the first humans to walk on the Moon.', NULL, 3),
+('Viking 1', '1975-08-20', '1980-11-13', 'First successful mission to Mars', 'Mars', 'Viking Orbiter and Lander', 'Planetary Exploration', 'Success', 'Viking 1 conducted the first successful soft landing on Mars and performed experiments to search for signs of life.', NULL, 5),
+('Voyager 1', '1977-09-05', 'Ongoing', 'Explore the outer reaches of the Solar System and beyond', 'Interstellar Space', 'Voyager 1 Spacecraft', 'Interstellar Exploration', 'Ongoing', 'Voyager 1 has reached interstellar space and continues to send back data about the heliosphere and beyond.', NULL, NULL),
+('New Horizons', '2006-01-19', 'Ongoing', 'Explore the Pluto system and the Kuiper Belt', 'Pluto', 'New Horizons Spacecraft', 'Planetary Exploration', 'Success', 'New Horizons conducted a flyby of Pluto and is continuing its journey to explore the Kuiper Belt.', NULL, 5),
+('Artemis I', '2024-02-01', NULL, 'Uncrewed test flight of the Space Launch System and Orion spacecraft', 'Low Earth Orbit', 'Orion Spacecraft', 'Spacecraft Test', 'Planned', 'Artemis I is the first flight of NASA\'s Artemis program, aiming to return humans to the Moon.', NULL, NULL);
+
+-- Additional insert statements for space_organisation table
+INSERT INTO space_organisation (name, country, established_date, partnership, projects, satellite_id, url)
+VALUES 
+('European Space Agency', 'Europe', '1975-05-30', 'NASA, Roscosmos, ESA member states', 50, NULL, 'https://www.esa.int/'),
+('China National Space Administration', 'China', '1993-04-22', 'CNSA, Chinese government agencies', 30, NULL, 'http://www.cnsa.gov.cn/'),
+('Russian Space Agency (Roscosmos)', 'Russia', '1992-01-25', 'ESA, NASA, CNSA', 40, NULL, 'https://www.roscosmos.ru/'),
+('SpaceX', 'United States', '2002-03-14', 'NASA, U.S. Air Force, private companies', 60, NULL, 'https://www.spacex.com/'),
+('National Aeronautics and Space Administration (NASA)', 'United States', '1958-07-29', 'ESA, Roscosmos, CNSA, private companies', 100, NULL, 'https://www.nasa.gov/');
+
+-- Additional insert statements for space_education table
+INSERT INTO space_education (type, title, published_date, level, description, url, celestial_body_id)
+VALUES 
+('Article', 'The History of Space Exploration', '2023-11-10', 'Intermediate', 'A timeline of key events and milestones in the history of human space exploration.', 'https://www.example.com/history-of-space-exploration', NULL),
+('Video', 'The Scale of the Universe', '2022-10-05', 'Beginner', 'A visual representation of the scale of objects in the universe, from the smallest particles to the largest galaxies.', 'https://www.example.com/scale-of-the-universe-video', NULL),
+('Book', 'Cosmos', '2021-07-15', 'Advanced', 'Written by Carl Sagan, this book explores the universe and our place within it, covering topics such as astronomy, biology, and philosophy.', 'https://www.example.com/cosmos-book', NULL),
+('Online Course', 'Astrophysics: Exploring the Universe', '2023-05-20', 'Intermediate', 'An in-depth course covering the fundamental principles of astrophysics, including stellar evolution, cosmology, and black holes.', 'https://www.example.com/astrophysics-course', NULL),
+('Interactive Module', 'The Solar System Explorer', '2024-03-01', 'Beginner', 'An interactive tool that allows users to explore the planets, moons, and other objects in our solar system.', 'https://www.example.com/solar-system-explorer', NULL);
