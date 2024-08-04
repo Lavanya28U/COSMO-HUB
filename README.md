@@ -1,2 +1,2 @@
 # COSMO-HUB
-A website which can be used to store the space data
+Cosmmo Hub is a web application dedicated to storing and presenting information about space. It serves as a valuable resource for space organizations and enthusiasts, providing detailed data and interactive features. There are two types of users: normal users and authenticated users. Normal users can view the information stored in the database, while authenticated users have the ability to view, alter, and store data.
